@@ -1,12 +1,13 @@
 var bodyParser = require('body-parser');
-//const rp = require('request-promise');
 const puppeteer = require('puppeteer');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded());
+app.use(cors({origin: '*'}));
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
