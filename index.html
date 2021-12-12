@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>QuizRead</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body style="font-family: Arial, Helvetica, sans-serif;">
+    <h3 id="info">Searching for quizzes...</h3>
+    <button class="btn controls" onclick="speak(questions);">Read Question</button>
+    <button class="btn controls" onclick="speak(answers);">Read Answer</button>
+    <button class="btn controls" onclick="current = current > 0 ? current-1 : current; updateDisplay();"><</button>
+    <span id="current">1</span>
+    <button class="btn controls" onclick="current = current < questions.length ? current+1 : current; updateDisplay();">></button>
+
+    <button type="button" class="collapsible">Questions</button>
+    <p id="questions" class="content"></p>
+    <button type="button" class="collapsible">Answers</button>
+    <p id="answers" class="content"></p>
+    <h3 id="links" style="text-align:center; margin-block-start: 0px;"></h3>
+    <script src="script.js"></script>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+    </script>
+</body>
+</html>
