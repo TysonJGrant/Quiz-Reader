@@ -60,13 +60,13 @@ app.post('/getQuiz', getQuiz);
 function getQuiz(req, res){
     (async () => {
         try {
-            console.log(111 + req.body.url)
+            console.log("Quiz URL1:  " + req.body.url)
             
             //Go to parent quiz page
             const browser = await puppeteer.launch();
             const page = await browser.newPage();
             await page.goto(req.body.url);   
-            console.log(222 + req.body.url)
+            console.log("Quiz URL2: " + req.body.url)
             
             //Find URL of iframe quiz content
             const data = await page.evaluate(() => document.querySelector('*').outerHTML);
@@ -92,9 +92,4 @@ function getQuiz(req, res){
             console.log(`Error while fetching quiz data ${e.message}`);
         }
     })();
-}
-  
-// Server setup
-app.listen(4000 , ()=>{
-    console.log("server running");
-});
+};

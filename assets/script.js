@@ -13,7 +13,7 @@ var msg = new SpeechSynthesisUtterance();
 //     url: "https://www.smh.com.au/national/good-weekend-superquiz-and-saturday-target-time-december-4-20211203-p59eo1.html"
 // }));
 
-httpGetAsync("http://localhost:4000", (links) => {
+httpGetAsync("http://localhost:3000", (links) => {
     quizLinks = JSON.parse(links);
     //get quiz names from links
     //display names  <a post request(i)>
@@ -41,6 +41,7 @@ function httpGetAsync(theUrl, callback)
 
 function getQuiz(pos, callback){
     current = 0;
+    updateDisplay();
     document.getElementById("info").innerHTML = "Loading Quiz for " + dates[pos] + "...";
     console.log(quizLinks[pos]);
     var xhr = new XMLHttpRequest();
@@ -48,7 +49,7 @@ function getQuiz(pos, callback){
         if (xhr.readyState == 4 && xhr.status == 200)
             callback(JSON.parse(xhr.responseText), pos);
     }
-    xhr.open("POST", "http://localhost:4000/getquiz", true);
+    xhr.open("POST", "http://localhost:3000/getquiz", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         url: quizLinks[pos]
@@ -58,6 +59,8 @@ function getQuiz(pos, callback){
 function populateQA(QAs, pos){
     questions = [];
     answers = [];
+    document.getElementById("questions").innerHTML = "";
+    document.getElementById("answers").innerHTML = "";
     for(let i = 0; i < QAs.length/2; i++){
         questions.push(QAs[i*2]);
         answers.push(QAs[i*2+1]);
