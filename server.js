@@ -16,7 +16,7 @@ app.get('/' , (req,res)=>{
 
     (async () => {
     try {
-        const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+        const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
         const page = await browser.newPage();
         const navigationPromise = page.waitForNavigation();
 
@@ -43,7 +43,7 @@ function getQuiz(req, res){
             console.log("Quiz URL1:  " + req.body.url)
             
             //Go to parent quiz page
-            const browser = await puppeteer.launch();
+            const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
             const page = await browser.newPage();
             await page.goto(req.body.url);   
             console.log("Quiz URL2: " + req.body.url)
