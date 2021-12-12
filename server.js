@@ -36,7 +36,7 @@ app.get('/' , (req,res)=>{
 
     (async () => {
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
         const page = await browser.newPage();
         const navigationPromise = page.waitForNavigation();
 
