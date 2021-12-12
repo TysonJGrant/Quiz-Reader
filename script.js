@@ -6,17 +6,8 @@ var dates = [];
 var current = 0;
 var msg = new SpeechSynthesisUtterance();
 
-// var xhr = new XMLHttpRequest();
-// xhr.open("POST", "http://localhost:4000/getquiz", true);
-// xhr.setRequestHeader('Content-Type', 'application/json');
-// xhr.send(JSON.stringify({
-//     url: "https://www.smh.com.au/national/good-weekend-superquiz-and-saturday-target-time-december-4-20211203-p59eo1.html"
-// }));
-
-httpGetAsync("http://localhost:3000", (links) => {
+httpGetAsync("https://quizreader.herokuapp.com", (links) => {
     quizLinks = JSON.parse(links);
-    //get quiz names from links
-    //display names  <a post request(i)>
     for(let i = 0; i < quizLinks.length; i++){
         let parts = quizLinks[i].split("-");
         dates.push(parts[4] == 'saturday' ? parts[4] + " " + parts[7] + " " + parts[8] : parts[4] + " " + parts[5] + " " + parts[6]);
@@ -49,7 +40,7 @@ function getQuiz(pos, callback){
         if (xhr.readyState == 4 && xhr.status == 200)
             callback(JSON.parse(xhr.responseText), pos);
     }
-    xhr.open("POST", "http://localhost:3000/getquiz", true);
+    xhr.open("POST", "https://quizreader.herokuapp.com/getquiz", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         url: quizLinks[pos]
