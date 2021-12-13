@@ -7,11 +7,6 @@ var current = 0;
 var msg = new SpeechSynthesisUtterance();
 var testing = true;
 var endpoint = testing ? "http://localhost:3000" : "https://quizreader.herokuapp.com";
-var synth = window.speechSynthesis;
-
- 
-  
-
 
 httpGetAsync(endpoint, (links) => {
     quizLinks = JSON.parse(links);
@@ -69,17 +64,8 @@ function populateQA(QAs, pos){
 }
 
 function speak(arr) {
-    var voices = synth.getVoices();
-    var utterThis = new SpeechSynthesisUtterance("This is to test my voice ok cool");
-    console.log(voices)
-    i = 0;
-    setInterval(function(){
-        console.log(voices[i]);
-        document.getElementById("current").innerText=voices[i];
-        utterThis.voice = voices[i];
-        synth.speak(utterThis);
-        i++;
-        }, 6000);
+    msg.text = arr[current];
+    speechSynthesis.speak(msg);
 }
 
 function updateDisplay(){
