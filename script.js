@@ -5,8 +5,15 @@ var titles = [];
 var dates = [];
 var current = 0;
 var msg = new SpeechSynthesisUtterance();
+var testing = true;
+var endpoint = testing ? "http://localhost:3000" : "https://quizreader.herokuapp.com";
+var synth = window.speechSynthesis;
 
-httpGetAsync("https://quizreader.herokuapp.com", (links) => {
+ 
+  
+
+
+httpGetAsync(endpoint, (links) => {
     quizLinks = JSON.parse(links);
     for(let i = 0; i < quizLinks.length; i++){
         let parts = quizLinks[i].split("-");
@@ -40,7 +47,7 @@ function getQuiz(pos, callback){
         if (xhr.readyState == 4 && xhr.status == 200)
             callback(JSON.parse(xhr.responseText), pos);
     }
-    xhr.open("POST", "https://quizreader.herokuapp.com/getquiz", true);
+    xhr.open("POST", endpoint + "/getquiz", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         url: quizLinks[pos]
@@ -62,8 +69,17 @@ function populateQA(QAs, pos){
 }
 
 function speak(arr) {
-    msg.text = arr[current];
-    speechSynthesis.speak(msg);
+    var voices = synth.getVoices();
+    var utterThis = new SpeechSynthesisUtterance("This is to test my voice ok cool");
+    console.log(voices)
+    i = 0;
+    setInterval(function(){
+        console.log(voices[i]);
+        document.getElementById("current").innerText=voices[i];
+        utterThis.voice = voices[i];
+        synth.speak(utterThis);
+        i++;
+        }, 6000);
 }
 
 function updateDisplay(){
