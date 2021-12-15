@@ -4,25 +4,29 @@ var answers;
 var titles = [];
 var dates = [];
 var current = 0;
+var disabled = false;
 var msg = new SpeechSynthesisUtterance();
 var testing = true;
 var endpoint = testing ? "http://localhost:3000" : "https://quizreader.herokuapp.com";
 
 httpGetAsync(endpoint, (links) => {
     quizLinks = JSON.parse(links);
+    titles += "<option value='description'>Select a Date...</option>";
     for(let i = 0; i < quizLinks.length; i++){
         let parts = quizLinks[i].split("-");
         dates.push(parts[4] == 'saturday' ? parts[4] + " " + parts[7] + " " + parts[8] : parts[4] + " " + parts[5] + " " + parts[6]);
-        titles += "<button class='quizLink btn' onClick='getQuiz(" + i + ", populateQA)'>" + dates[i] + "</button><br>";
+        titles += "<option value=" + i + ">" + dates[i] + "</option><br>";
         document.getElementById("links").innerHTML = titles;
     }
     document.getElementById("info").innerHTML = "Select a Date:";
     console.log(quizLinks);
     console.log(titles);
+    toggleDisabled(false);
 });
 
 function httpGetAsync(theUrl, callback)
 {
+    toggleDisabled(true);
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -33,6 +37,9 @@ function httpGetAsync(theUrl, callback)
 }
 
 function getQuiz(pos, callback){
+    if(pos == "description")
+        return;
+    toggleDisabled(true);
     current = 0;
     updateDisplay();
     document.getElementById("info").innerHTML = "Loading Quiz for " + dates[pos] + "...";
@@ -61,6 +68,7 @@ function populateQA(QAs, pos){
         document.getElementById("answers").innerHTML += (i+1) + ". " + QAs[i*2+1] + '<br>';
     }
     document.getElementById("info").innerHTML = dates[pos] + " Quiz is Ready!";
+    toggleDisabled(false);
 }
 
 function speak(arr) {
@@ -70,5 +78,27 @@ function speak(arr) {
 
 function updateDisplay(){
     document.getElementById("current").innerText=current+1;
+}
+
+function toggleDisabled(val){
+    disabled = val
+    document.querySelectorAll('.btn').forEach(elem => {
+        elem.disabled = disabled;
+    });
+}
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "block";
+    }
+    });
 }
         

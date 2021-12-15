@@ -1,28 +1,39 @@
-button{
-  text-transform: capitalize;
+body{
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .floatingHeader{
-  position: absolute;
+  position: sticky;
   width: 100%;
   top: 0px;
   left: 0px;
   padding: 5px;
+  color: #fff;
+  background-color: #222;
 }
 
-.body{
-  padding-top: 100px;
+.floatingFooter{
+  position: fixed;
+  width: 100%;
+  top: auto;
+  bottom: 0px;
+  height: fit-content;
+  left: 0px;
+  padding: 5px;
+  text-align: center; 
+  color: #fff;
+  background-color: #222;
 }
 
 .shadow {
-  -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
--moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  -webkit-box-shadow: 0 3px 6px rgba(57, 63, 72, 0.5);
+-moz-box-shadow: 0 3px 6px rgba(57, 63, 72, 0.5);
+box-shadow: 0 3px 6px rgba(57, 63, 72, 0.5);
 }
 
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
-  background-color: #eee;
+  background: #2196f3;
   color: #444;
   cursor: pointer;
   padding: 16px;
@@ -30,14 +41,15 @@ box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 16px;
   margin: 6px 0px 6px 0px;
-  border-radius: 10px;
+  border-radius: 15px;
+  font-weight: bold;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .collapsible:hover {
-  background-color: #ccc;
+  background-color: #003cff;
 }
 
 /* Style the collapsible content. Note: hidden by default */
@@ -46,7 +58,7 @@ box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .btn {
@@ -62,7 +74,14 @@ box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
   text-decoration: none;
   font-size: 14px;
   font-family: inherit;
+  font-weight: bold;
 }
+
+.quizLink{
+  text-align: center; 
+  margin-block-start: 0px;
+}
+
 .btn:focus {
   outline: none;
 }
@@ -81,4 +100,21 @@ box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
 
 #info{
   text-transform: capitalize;
+}
+
+button{
+  text-transform: capitalize;
+}
+
+.quizLink:hover,
+button:hover {
+  background-color: #003cff;
+}
+
+button:disabled,
+button[disabled],
+select:disabled,
+select[disabled]{
+  background-color: #cccccc;
+  color: #666666;
 }
