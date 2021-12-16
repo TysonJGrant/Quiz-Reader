@@ -1,5 +1,7 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0px;
+  margin-bottom: 60px;;
 }
 
 .floatingHeader{
@@ -45,11 +47,6 @@ box-shadow: 0 3px 6px rgba(57, 63, 72, 0.5);
   margin: 6px 0px 6px 0px;
   border-radius: 15px;
   font-weight: bold;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .collapsible:hover {
-  background-color: #003cff;
 }
 
 /* Style the collapsible content. Note: hidden by default */
@@ -106,7 +103,6 @@ button{
   text-transform: capitalize;
 }
 
-.quizLink:hover,
 button:hover {
   background-color: #003cff;
 }
