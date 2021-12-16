@@ -6,7 +6,7 @@ var dates = [];
 var current = 0;
 var disabled = false;
 var msg = new SpeechSynthesisUtterance();
-var testing = true;
+var testing = false;
 var endpoint = testing ? "http://localhost:3000" : "https://quizreader.herokuapp.com";
 
 httpGetAsync(endpoint, (links) => {
