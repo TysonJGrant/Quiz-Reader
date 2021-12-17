@@ -6,7 +6,7 @@ var dates = [];
 var current = 0;
 var disabled = false;
 var msg = new SpeechSynthesisUtterance();
-var testing = false;
+var testing = true;
 var endpoint = testing ? "http://localhost:3000" : "https://quizreader.herokuapp.com";
 
 httpGetAsync(endpoint, (links) => {
@@ -43,7 +43,6 @@ function getQuiz(pos, callback){
     current = 0;
     updateDisplay();
     document.getElementById("info").innerHTML = "Loading Quiz for " + dates[pos] + "...";
-    console.log(quizLinks[pos]);
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() { 
         if (xhr.readyState == 4 && xhr.status == 200)
@@ -89,10 +88,8 @@ function toggleDisabled(val){
 
 function updateName(val){
     let name = document.getElementById(val).innerHTML;
-    if(document.getElementById(val).className == 'collapsible active'){
-        console.log(document.getElementById(val).className + "..." + val)
+    if(document.getElementById(val).className == 'collapsible active')
         document.getElementById(val).innerHTML = name.substring(0, name.length-1) + "▼";
-    }
     else
         document.getElementById(val).innerHTML = name.substring(0, name.length-1) + "▲"       
 }
@@ -101,7 +98,6 @@ var coll = document.getElementsByClassName("collapsible");
 var i;
 
 for (i = 0; i < coll.length; i++) {
-    console.log(i)
     coll[i].addEventListener("click", function() {
         this.classList.toggle("active");
         var content = this.nextElementSibling;

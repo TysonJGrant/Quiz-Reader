@@ -6,7 +6,6 @@ body{
 
 .floatingHeader{
   position: sticky;
-  width: 100%;
   top: 0px;
   left: 0px;
   padding: 5px;
@@ -31,6 +30,10 @@ body{
   -webkit-box-shadow: 0 3px 6px rgba(57, 63, 72, 0.5);
 -moz-box-shadow: 0 3px 6px rgba(57, 63, 72, 0.5);
 box-shadow: 0 3px 6px rgba(57, 63, 72, 0.5);
+}
+
+.body{
+  padding: 10px;
 }
 
 /* Style the button that is used to open and close the collapsible content */
